@@ -78,4 +78,7 @@ public abstract class Alquilable {
     public void setAlquilado(Boolean alquilado) {
         this.alquilado = alquilado;
     }
+
+    public abstract <T> Comparable temporadas();
+    public abstract <T> Comparable horas();
 }

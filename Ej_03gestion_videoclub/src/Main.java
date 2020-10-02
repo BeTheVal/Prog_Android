@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
@@ -155,19 +152,32 @@ public class Main {
 
                 case 4:
                     System.out.println("Estadisticas:");
-                    AtomicInteger seriesAlquiladas = new AtomicInteger();
+                    int seriesAlquiladas = 0;
                     int videojuegosAlquilados = 0;
-                    Serie serTemp = new Serie("0000",0);
+                    //TODO mirar el incremento de variables
+
                     almacenSeries.forEach(serie -> {
-                        if (serie.alquilado.equals(true)) {
-                            seriesAlquiladas.getAndIncrement();
+                                if (serie.alquilado.equals(true)) {
+                                    seriesAlquiladas ++;
+                                }
+                            });
+
+                    almacenVideojuegos.forEach(videojuego -> {
+                        if(videojuego.alquilado.equals(true)){
+                            videojuegosAlquilados ++;
                         }
-
-                        //TODO Ordenar las colecciones por Temporadas y horas
-
                     });
+                    //TODO cambiar comparadores a las clases videojuegos y Serie
+                       /* almacenSeries.sort(Comparator.comparing(Alquilable::temporadas));
+                        almacenVideojuegos.sort(Comparator.comparing(Alquilable::horas));*/
+
+
                     System.out.println("Videojuegos totales: " + almacenVideojuegos.size());
                     System.out.println("Videojuegos alquilados: " + videojuegosAlquilados);
+                    System.out.println("Videojuego con más horas: " + almacenVideojuegos.get(0));
+                    System.out.println("Series totales: "+ almacenSeries.size());
+                    System.out.println("Series alquiladas: ");
+                    System.out.println("Serie con más temporadas:");
 
                     break;
                 case 5:

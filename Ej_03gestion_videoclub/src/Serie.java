@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Serie extends Alquilable {
     int temporadas = 3;
 
@@ -57,4 +59,16 @@ public class Serie extends Alquilable {
                 "======================";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Serie serie = (Serie) o;
+        return temporadas == serie.temporadas;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(temporadas);
+    }
 }
