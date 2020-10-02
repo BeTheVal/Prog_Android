@@ -46,4 +46,36 @@ public abstract class Alquilable {
     public Serie comparar (Serie a, Serie b){
         return null;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public Boolean getAlquilado() {
+        return alquilado;
+    }
+
+    public void setAlquilado(Boolean alquilado) {
+        this.alquilado = alquilado;
+    }
 }

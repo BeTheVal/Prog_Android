@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,7 +45,8 @@ public class Main {
                     "1. Crear Serie/Videojuego \n" +
                     "2. Alquilar\n" +
                     "3. Devolver\n" +
-                    "4. Estadistica\n"+
+                    "4. Estadistica\n" +
+                    "5. Listar series/videojuegos\n "+
                     "Elija que deseas hacer: ");
             eleccion = sc.nextInt();
             switch (eleccion){
@@ -67,7 +69,7 @@ public class Main {
                         } else {
                             nuevoAlqbol = false;
                         }
-                        int genId = (int) (Math.random() * 10 + 10000000);
+                        int genId = (int) (Math.random() * 10000000 + 10000000);
                         try {
                             almacenSeries.add(new Serie("" + genId, nuevoTitulo, nuevogenero, nuevoTemporadas, nuevoAlqbol));
                             System.out.println("Su serie se ha almacenado correctamente");
@@ -111,8 +113,64 @@ public class Main {
                     if(alqCat.toLowerCase().equals("s")){
                         System.out.print("Introduce el ID de la serie: ");
                         String alqId = sc.next();
+                        almacenSeries.forEach((serie ->{
+                            if (serie.id.equals(alqId)){
+                                serie.entregar();
+                            }
+                        }));
                         
+                    }else {
+                        System.out.print("Introduce el ID del videojuego: ");
+                        String alqId = sc.next();
+                        almacenVideojuegos.forEach((videojuego -> {
+                            if(videojuego.id.equals(alqId)){
+                                videojuego.entregar();
+                            }
+                        }));
                     }
+                case 3:
+                    System.out.print("¿Serie o Videojuego?\nS/V: ");
+                    String devolCat = sc.next();
+                    if(devolCat.toLowerCase().equals("s")){
+                        System.out.print("Introduce el ID de la serie: ");
+                        String devolId = sc.next();
+                        almacenSeries.forEach((serie ->{
+                            if (serie.id.equals(devolId)){
+                                serie.devolver();
+                            }
+                        }));
+
+                    }else {
+                        System.out.print("Introduce el ID del videojuego: ");
+                        String devolId = sc.next();
+                        almacenVideojuegos.forEach((videojuego -> {
+                            if(videojuego.id.equals(devolId)){
+                                videojuego.devolver();
+                            }
+                        }));
+                    }
+
+                case 4:
+                    System.out.println("Estadisticas:");
+                    AtomicInteger seriesTotales = new AtomicInteger();
+                    AtomicInteger seriesAlquiladas = new AtomicInteger();
+                    int videojuegosTotales= 0;
+                    int videojuegosAlquilados= 0;
+                    almacenSeries.forEach(serie -> {
+                        if (serie.alquilado.equals(true)){
+                            seriesAlquiladas.getAndIncrement();
+                            seriesTotales.getAndIncrement();
+                        }else{
+                            seriesTotales.getAndIncrement();
+                        }
+                    });
+                case 5:
+                    almacenSeries.forEach((s)-> {
+                        System.out.println(s);
+                    });
+                    almacenVideojuegos.forEach((v)-> {
+                        System.out.println(v);
+                    });
             }
 
 

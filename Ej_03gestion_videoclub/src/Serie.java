@@ -39,4 +39,23 @@ public class Serie extends Alquilable {
     public Serie comparar(Serie a, Serie b) {
         return super.comparar(a, b);
     }
+
+    @Override
+    public String toString() {
+        String alquiladoString;
+        if(alquilado){
+            alquiladoString = "Sí";
+        }else{
+            alquiladoString ="No";
+
+        }
+        return "======================\n" +
+                "ID:'" + id + '\'' +
+                "Título:'" + titulo + '\'' +
+                "\nGénero:'" + genero + '\'' +
+                "\nalquilado:" + alquiladoString +
+                '}'+"\n" +
+                "======================";
+    }
+
 }

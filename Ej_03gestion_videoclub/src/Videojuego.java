@@ -38,4 +38,16 @@ public class Videojuego extends Alquilable {
     public Videojuego comparar(Videojuego a, Videojuego b) {
         return super.comparar(a, b);
     }
+
+    @Override
+    public String toString() {
+        return "Videojuego{" +
+                "compañia='" + compañia + '\'' +
+                ", horas=" + horas +
+                ", id='" + id + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", genero='" + genero + '\'' +
+                ", alquilado=" + alquilado +
+                '}';
+    }
 }
