@@ -19,6 +19,7 @@ public class Videojuego extends Alquilable {
         this.horas = horas;
     }
     /*Fin de constructores*/
+
     @Override
     public void entregar() {
         super.entregar();
@@ -41,13 +42,21 @@ public class Videojuego extends Alquilable {
 
     @Override
     public String toString() {
-        return "Videojuego{" +
-                "compañia='" + compañia + '\'' +
-                ", horas=" + horas +
-                ", id='" + id + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", genero='" + genero + '\'' +
-                ", alquilado=" + alquilado +
-                '}';
+        String alquiladoString;
+        if (alquilado) {
+            alquiladoString = "Alquilado";
+        } else {
+            alquiladoString = "En almacén";
+
+        }
+        return "======================\n" +
+                "ID: " + this.id +
+                "Título: " + this.titulo +
+                "Género: " + this.genero +
+                "Compañía" + this.compañia+
+                "Horas: " + this.horas+
+                "Estado: " + alquiladoString +
+                "======================";
+
     }
 }

@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -46,10 +48,10 @@ public class Main {
                     "2. Alquilar\n" +
                     "3. Devolver\n" +
                     "4. Estadistica\n" +
-                    "5. Listar series/videojuegos\n "+
+                    "5. Listar series/videojuegos\n " +
                     "Elija que deseas hacer: ");
             eleccion = sc.nextInt();
-            switch (eleccion){
+            switch (eleccion) {
                 case 1:
                     System.out.print("¿Serie o Videojuego?\nS/V: ");
                     String nuevoCateg = sc.next();
@@ -78,7 +80,7 @@ public class Main {
                             System.out.println("Ha ocurrido un error al crear la serie.");
                             e.printStackTrace();
                         }
-                    }else {
+                    } else {
                         System.out.println("Introduzca el título:");
                         String nuevoTitulo = sc.next();
                         System.out.println("Introduzca el genero:");
@@ -97,7 +99,7 @@ public class Main {
                         }
                         int genId = (int) (Math.random() * 10 + 10000000);
                         try {
-                            almacenVideojuegos.add(new Videojuego("" + genId, nuevoTitulo, nuevogenero, nuevoCompañia,nuevoHoras, nuevoAlqbol));
+                            almacenVideojuegos.add(new Videojuego("" + genId, nuevoTitulo, nuevogenero, nuevoCompañia, nuevoHoras, nuevoAlqbol));
                             System.out.println("Su videojuego se ha almacenado correctamente");
 
                         } catch (Exception e) {
@@ -110,20 +112,20 @@ public class Main {
                 case 2:
                     System.out.print("¿Serie o Videojuego?\nS/V: ");
                     String alqCat = sc.next();
-                    if(alqCat.toLowerCase().equals("s")){
+                    if (alqCat.toLowerCase().equals("s")) {
                         System.out.print("Introduce el ID de la serie: ");
                         String alqId = sc.next();
-                        almacenSeries.forEach((serie ->{
-                            if (serie.id.equals(alqId)){
+                        almacenSeries.forEach((serie -> {
+                            if (serie.id.equals(alqId)) {
                                 serie.entregar();
                             }
                         }));
-                        
-                    }else {
+
+                    } else {
                         System.out.print("Introduce el ID del videojuego: ");
                         String alqId = sc.next();
                         almacenVideojuegos.forEach((videojuego -> {
-                            if(videojuego.id.equals(alqId)){
+                            if (videojuego.id.equals(alqId)) {
                                 videojuego.entregar();
                             }
                         }));
@@ -131,51 +133,51 @@ public class Main {
                 case 3:
                     System.out.print("¿Serie o Videojuego?\nS/V: ");
                     String devolCat = sc.next();
-                    if(devolCat.toLowerCase().equals("s")){
+                    if (devolCat.toLowerCase().equals("s")) {
                         System.out.print("Introduce el ID de la serie: ");
                         String devolId = sc.next();
-                        almacenSeries.forEach((serie ->{
-                            if (serie.id.equals(devolId)){
+                        almacenSeries.forEach((serie -> {
+                            if (serie.id.equals(devolId)) {
                                 serie.devolver();
                             }
                         }));
 
-                    }else {
+                    } else {
                         System.out.print("Introduce el ID del videojuego: ");
                         String devolId = sc.next();
                         almacenVideojuegos.forEach((videojuego -> {
-                            if(videojuego.id.equals(devolId)){
+                            if (videojuego.id.equals(devolId)) {
                                 videojuego.devolver();
                             }
                         }));
                     }
+                    break;
 
                 case 4:
                     System.out.println("Estadisticas:");
-                    AtomicInteger seriesTotales = new AtomicInteger();
                     AtomicInteger seriesAlquiladas = new AtomicInteger();
-                    int videojuegosTotales= 0;
-                    int videojuegosAlquilados= 0;
+                    int videojuegosAlquilados = 0;
+                    Serie serTemp = new Serie("0000",0);
                     almacenSeries.forEach(serie -> {
-                        if (serie.alquilado.equals(true)){
+                        if (serie.alquilado.equals(true)) {
                             seriesAlquiladas.getAndIncrement();
-                            seriesTotales.getAndIncrement();
-                        }else{
-                            seriesTotales.getAndIncrement();
                         }
+
+                        //TODO Ordenar las colecciones por Temporadas y horas
+
                     });
+                    System.out.println("Videojuegos totales: " + almacenVideojuegos.size());
+                    System.out.println("Videojuegos alquilados: " + videojuegosAlquilados);
+
+                    break;
                 case 5:
-                    almacenSeries.forEach((s)-> {
+                    almacenSeries.forEach((s) -> {
                         System.out.println(s);
                     });
-                    almacenVideojuegos.forEach((v)-> {
+                    almacenVideojuegos.forEach((v) -> {
                         System.out.println(v);
                     });
             }
-
-
-
-
 
 
         } while (eleccion != 0);

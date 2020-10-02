@@ -43,18 +43,17 @@ public class Serie extends Alquilable {
     @Override
     public String toString() {
         String alquiladoString;
-        if(alquilado){
-            alquiladoString = "Sí";
-        }else{
-            alquiladoString ="No";
+        if (alquilado) {
+            alquiladoString = "Alquilado";
+        } else {
+            alquiladoString = "En almacén";
 
         }
         return "======================\n" +
-                "ID:'" + id + '\'' +
-                "Título:'" + titulo + '\'' +
-                "\nGénero:'" + genero + '\'' +
-                "\nalquilado:" + alquiladoString +
-                '}'+"\n" +
+                "ID: " + this.id +
+                "Título: " + this.titulo +
+                "Género: " + this.genero +
+                "Estado: " + alquiladoString +
                 "======================";
     }
 
