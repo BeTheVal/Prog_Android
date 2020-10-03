@@ -1,7 +1,8 @@
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Serie extends Alquilable {
-    int temporadas = 3;
+    private int temporadas = 3;
 
     /*Constructores*/
     public Serie(String id, String titulo, String genero, int temporadas, Boolean alquilado) {
@@ -22,6 +23,16 @@ public class Serie extends Alquilable {
     }
     /*Fin de constructores*/
 
+    /*Getter y Setters*/
+    public int getTemporadas() {
+        return temporadas;
+    }
+
+    public void setTemporadas(int temporadas) {
+        this.temporadas = temporadas;
+    }
+    /*Fin de Getter y Setters*/
+
     @Override
     public void entregar() {
         super.entregar();
@@ -37,38 +48,39 @@ public class Serie extends Alquilable {
         return super.esEntregado();
     }
 
-    @Override
+    /**
+     *
+     * @param a Serie
+     * @param b Serie
+     * @return Serie con mayor numero de temporadas o en caso de ser iguales un mensaje y la Serie B
+     */
     public Serie comparar(Serie a, Serie b) {
-        return super.comparar(a, b);
-    }
-
-    @Override
-    public String toString() {
-        String alquiladoString;
-        if (alquilado) {
-            alquiladoString = "Alquilado";
-        } else {
-            alquiladoString = "En almacén";
-
+        if (a.temporadas == b.temporadas) {
+            System.out.println("Ambos tienen la misma cantidad de tempordas");
+        } else if (a.temporadas > b.temporadas) {
+            return a;
         }
-        return "======================\n" +
-                "ID: " + this.id +
-                "Título: " + this.titulo +
-                "Género: " + this.genero +
-                "Estado: " + alquiladoString +
-                "======================";
+
+            return b;
+
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Serie serie = (Serie) o;
-        return temporadas == serie.temporadas;
-    }
+        @Override
+        public String toString () {
+            String alquiladoString;
+            if (alquilado) {
+                alquiladoString = "Alquilado";
+            } else {
+                alquiladoString = "En almacén";
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(temporadas);
-    }
+            }
+            return "======================\n" +
+                    "ID: " + this.id +
+                    "\n Título: " + this.titulo +
+                    "\n Género: " + this.genero +
+                    "\n Temporadas: " + this.temporadas+
+                    "\n Estado: " + alquiladoString +
+                    "\n======================";
+        }
+
 }

@@ -1,6 +1,6 @@
 public class Videojuego extends Alquilable {
-    String compañia;
-    int horas = 0;
+    private String compañia;
+    private int horas = 0;
     /*Constructores*/
     public Videojuego(String id, String titulo, String genero, String compañia, int horas, Boolean alquilado) {
         super(id, titulo, genero, alquilado);
@@ -35,9 +35,24 @@ public class Videojuego extends Alquilable {
         return super.esEntregado();
     }
 
-    @Override
+    /**
+     * Método usado para comparar las horas de juego en Videojuegos
+     * @param a Videojuego
+     * @param b Videojuego
+     * @return Videojuego con más horas o un mensaje y el videojuego B
+     */
     public Videojuego comparar(Videojuego a, Videojuego b) {
-        return super.comparar(a, b);
+        if (a.horas == b.horas){
+            System.out.println("Tiene la misma cantidad de horas");
+        }else if(a.horas> b.horas){
+            return a;
+        }else
+            return b;
+        return b;
+    }
+
+    public int getHoras() {
+        return horas;
     }
 
     @Override
@@ -51,12 +66,13 @@ public class Videojuego extends Alquilable {
         }
         return "======================\n" +
                 "ID: " + this.id +
-                "Título: " + this.titulo +
-                "Género: " + this.genero +
-                "Compañía" + this.compañia+
-                "Horas: " + this.horas+
-                "Estado: " + alquiladoString +
-                "======================";
+                "\n Título: " + this.titulo +
+                "\n Género: " + this.genero +
+                "\n Compañía" + this.compañia+
+                "\n Horas: " + this.horas+
+                "\n Estado: " + alquiladoString +
+                "\n ======================";
+
 
     }
 }

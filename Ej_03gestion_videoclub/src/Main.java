@@ -37,6 +37,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ArrayList<Serie> almacenSeries = new ArrayList<>();
         ArrayList<Videojuego> almacenVideojuegos = new ArrayList<>();
+
+        /*almacenSeries.add(new Serie("Serie1",3));
+        almacenSeries.add(new Serie("Serie2",7));
+        Videojuego v1 = new Videojuego("video1",300);
+        almacenVideojuegos.add(v1);
+        Videojuego v2 = new Videojuego("video2",500);
+        almacenVideojuegos.add(v2);*/
+
+
         int eleccion;
         do {
             System.out.print("Bienvenido a nuestro videoclub\n" +
@@ -127,6 +136,7 @@ public class Main {
                             }
                         }));
                     }
+                    break;
                 case 3:
                     System.out.print("¿Serie o Videojuego?\nS/V: ");
                     String devolCat = sc.next();
@@ -152,32 +162,30 @@ public class Main {
 
                 case 4:
                     System.out.println("Estadisticas:");
-                    int seriesAlquiladas = 0;
-                    int videojuegosAlquilados = 0;
-                    //TODO mirar el incremento de variables
+                    AtomicInteger seriesAlquiladas = new AtomicInteger();
+                    AtomicInteger videojuegosAlquilados = new AtomicInteger();
 
                     almacenSeries.forEach(serie -> {
                                 if (serie.alquilado.equals(true)) {
-                                    seriesAlquiladas ++;
+                                    seriesAlquiladas.getAndIncrement();
                                 }
                             });
 
                     almacenVideojuegos.forEach(videojuego -> {
                         if(videojuego.alquilado.equals(true)){
-                            videojuegosAlquilados ++;
+                            videojuegosAlquilados.getAndIncrement();
                         }
                     });
-                    //TODO cambiar comparadores a las clases videojuegos y Serie
-                       /* almacenSeries.sort(Comparator.comparing(Alquilable::temporadas));
-                        almacenVideojuegos.sort(Comparator.comparing(Alquilable::horas));*/
+                    System.out.println("Series totales: "+ almacenSeries.size());
+                    System.out.println("Series alquiladas: " +seriesAlquiladas);
+                    Serie serieMasTemp = Collections.max(almacenSeries, Comparator.comparing(c -> c.getTemporadas()));
+                    System.out.println("Serie con más temporadas\n" + serieMasTemp);
 
-
+                    Videojuego videojuegoMasHoras = Collections.max(almacenVideojuegos, Comparator.comparing(c -> c.getHoras()));
                     System.out.println("Videojuegos totales: " + almacenVideojuegos.size());
                     System.out.println("Videojuegos alquilados: " + videojuegosAlquilados);
-                    System.out.println("Videojuego con más horas: " + almacenVideojuegos.get(0));
-                    System.out.println("Series totales: "+ almacenSeries.size());
-                    System.out.println("Series alquiladas: ");
-                    System.out.println("Serie con más temporadas:");
+                    System.out.println("Videojuego con más horas\n" + videojuegoMasHoras);
+
 
                     break;
                 case 5:
@@ -188,6 +196,7 @@ public class Main {
                         System.out.println(v);
                     });
             }
+
 
 
         } while (eleccion != 0);
